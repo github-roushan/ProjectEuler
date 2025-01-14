@@ -1,6 +1,6 @@
 
 dic = {}
-limit = 10
+limit = 2*10**6
 for i in range(1,limit+1):
     dic[i] = True
 dic[1] = False

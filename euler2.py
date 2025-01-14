@@ -1,10 +1,19 @@
 
-a, b  = 1, 2
-sm = 0
+## f0, f1, f2 = 0, 1, 1
 
-while b < 4*10**6:
-    sm += b
-    for _ in range(3):
-        a, b = b, a+b
+def getEvenFibSumUnder(LIM):
+    f2, f3  = 1, 2
+    totalEvenFibonacciSum = 0
 
-print(sm)
+    while f3 < LIM:
+        totalEvenFibonacciSum += f3
+        ## every 3rd number is even fib
+        f2, f3 = f3, f2+f3
+        f2, f3 = f3, f2+f3
+        f2, f3 = f3, f2+f3
+    
+    return totalEvenFibonacciSum
+
+for case in range(int(input())):    
+    N = int(input())
+    print(getEvenFibSumUnder(N))

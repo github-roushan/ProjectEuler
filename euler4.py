@@ -1,20 +1,31 @@
-
+import bisect
 
 def ispalindrome(num):
-    dig = str(num)
-    ln = len(dig)
-    for i in range(ln//2):
-        if dig[i] != dig[ln-i-1]:
+    num_str = str(num)
+    L = len(num_str)
+    for i in range(L//2):
+        if num_str[i] != num_str[L-i-1]:
             return False
-
     return True
 
-ans = 0
-for n1 in range(100, 1000):
-    for n2 in range(n1, 1000):
-        pro  = n1 * n2
+allPalindromes = []
+for num1 in range(100, 1000):
+    for num2 in range(num1, 1000):
+        pro  = num1 * num2
         if ispalindrome(pro):
-            ans = max(ans, pro)
+            allPalindromes.append(pro)
+allPalindromes.sort()
 
-print(ans)
+def getLargestPalindromeLessThan(LIM):
+    ind = bisect.bisect_left(allPalindromes, LIM)
+    if ind == len(allPalindromes):
+        return allPalindromes[-1]
+    ind -= 1
+    if ind < 0:
+        return -1
+    return allPalindromes[ind]
+
+for case in range(int(input())):
+    N = int(input())
+    print(getLargestPalindromeLessThan(N))
             

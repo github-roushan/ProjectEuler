@@ -1,17 +1,28 @@
+'''
+a^2 + b^2 = c^2
+a = 2mn
+b = m*2 - n*2
+c = m*2 + n*2
 
+a+b+c = N
+implies
+2m(m+n) = N
+'''
 
-def solve():
-    for m in range(1, 501):
-        for n in range(1, 501):
-            for k in range(1, 501):
-                if m*(m+n)*k > 500:
-                    break
-                if m*(m+n)*k == 500:
-                    if m-n>=1:
-                        a = 2*m*n*k
-                        b = (m**2 - n**2)*k
-                        c = (m**2 + n**2)*k
-                        print('debug a = {}, b = {}, c = {}'.format(a, b, c))
-                        return a*b*c
+def solve(N):
+    if N % 2:
+        return -1
+    maxProduct = -1
+    for m in range(1, N//2+1):
+        m_n = N//(2*m)
+        n = m_n - m
+        if n <= m:
+            break
+        curProduct = 2*m*n * (m**2 + n**2) * (m**2 - n**2)
+        maxProduct = max(maxProduct, curProduct)
+        print(2*m*n , (m**2 + n**2) , (m**2 - n**2))
+    return maxProduct
 
-print(solve())
+for case in range(int(input())):
+    N = int(input())
+    print(solve(N))

@@ -1,30 +1,19 @@
+#!/bin/python3
 
+def getMaxPrime(num):
+    prime = 2
+    maxPrime = 0
+    while prime**2 <= num:
+        while num % prime == 0:
+            maxPrime = max(prime, maxPrime)
+            num = num // prime
+        prime += 1
+        if prime % 2 == 0:
+            prime += 1
+    if num > 1:
+        maxPrime = max(maxPrime, num)
+    return maxPrime
 
-def primeFact(n: int) -> dict:
-
-    dic = {}
-    if n%2==0:
-        c = 0
-        while n%2==0:
-            c += 1
-            n = n//2
-
-        dic[2] = c
-
-    div = 3
-    while div**2 <= n:
-        if n%div==0:
-            c = 0
-            while n%div == 0:
-                n = n//div
-                c += 1
-            dic[div] = c
-
-        div += 2
-
-    if n>2:
-        dic[n] = 1
-
-    return dic
-                
-                
+for case in range(int(input())):
+    N = int(input().strip())
+    print(getMaxPrime(N))
